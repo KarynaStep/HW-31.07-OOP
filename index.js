@@ -4,7 +4,7 @@
 // Створити функцію getVolume3DFigure, яка приймає будь яку 3d фігуру і повертає її об'єм.
 
 // v - 1 (Перевірки окремо)
-function checkValueString(value) {
+function errorProcessingString(value) {
   if (typeof value !== "string") {
     throw new TypeError("enter to string");
   }
@@ -12,7 +12,7 @@ function checkValueString(value) {
     throw new RangeError("enter name");
   }
 }
-function checkValueNumber(value) {
+function errorProcessingNumber(value) {
   if (typeof value !== "number") {
     throw new TypeError("enter the numder");
   }
@@ -27,6 +27,10 @@ function checkValueNumber(value) {
 class Figeure3D {
   #name;
   constructor(name) {
+    if (this.constructor === Figeure3D) {
+      throw new Error("You cannot create instance in abstract class Figure");
+    }
+    checkValueString(name);
     this.name = name;
   }
   getVolume() {}
@@ -127,7 +131,6 @@ try {
 } catch (error) {
   console.log(error.message);
 }
-
 
 // v - 2 (Перевірки в класах)
 // class Figeure3D {
@@ -239,7 +242,6 @@ try {
 //   }
 //   throw new TypeError("must be instance Figure");
 // }
-
 
 // try {
 //   console.group()
